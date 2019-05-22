@@ -2,23 +2,23 @@
 // Created by siyualbak on 19. 5. 22.
 //
 
-#include "initializer/gl3wContext.h"
+#include "context/gl3wContext.h"
 
 #include <GL/gl3w.h>
 #include <sstream>
 
-#include "exception/cantLoadException.h"
+#include "exception/cantInitException.h"
 #include "exception/notSupportException.h"
 
-gl::GL3WInitializer::GL3WInitializer(const gl::Initializer::Version &version)
+gl::GL3WContext::GL3WContext(const gl::Context::Version &version)
   : version{version} {
 }
 
-gl::GL3WInitializer::~GL3WInitializer() = default;
+gl::GL3WContext::~GL3WContext() = default;
 
-void gl::GL3WInitializer::init() {
+void gl::GL3WContext::init() {
   if (!gl3wInit())
-    throw CantLoadException{"gl::GL3WInitializer::init: Can't load gl."};
+    throw CantInitException{"gl::GL3WInitializer::init: Can't load gl."};
   if (!gl3wIsSupported(version.major, version.minor)) {
     std::stringstream error{};
     error << "gl::GL3WInitializer::init: " << version.major << "." << version.minor << " is not supported.";

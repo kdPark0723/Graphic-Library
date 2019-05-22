@@ -9,17 +9,15 @@
 
 namespace gl {
 
-class GLFWInitializer : public Initializer {
+class GLFWContext : public Context {
  public:
-  explicit GLFWInitializer(const Version &version);
-  ~GLFWInitializer() override;
+  explicit GLFWContext(const Version &version);
+  ~GLFWContext() override;
 
   void init() override;
 
  private:
   static void errorCallback(int errorCode, const char* errorDescription);
-
-  static GLFWInitializer *mainInitializer;
 
   Version version;
   bool isInited;

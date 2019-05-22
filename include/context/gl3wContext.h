@@ -9,10 +9,10 @@
 
 namespace gl {
 
-class GL3WInitializer : public Initializer {
+class GL3WContext : public Context {
  public:
-  explicit GL3WInitializer(const Version &version);
-  ~GL3WInitializer() override;
+  explicit GL3WContext(const Version &version);
+  ~GL3WContext() override;
 
   void init() override;
 
