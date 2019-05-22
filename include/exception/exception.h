@@ -1,0 +1,8 @@
+//
+// Created by siyualbak on 19. 5. 22.
+//
+
+#ifndef GRAPHICLIBRARY_EXCEPTION_H
+#define GRAPHICLIBRARY_EXCEPTION_H
+
+#endif //GRAPHICLIBRARY_EXCEPTION_H
