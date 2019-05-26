@@ -51,6 +51,7 @@ add_dependencies(${GMOCK_LIBRARY} googletest)
 file(GLOB MY_SRCS
     ${PROJECT_SOURCE_DIR}/src/*.cpp
     ${PROJECT_SOURCE_DIR}/src/*/*.cpp
+    ${PROJECT_SOURCE_DIR}/src/*/*/*.cpp
     )
 set(MY_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/include)
 
@@ -60,4 +61,5 @@ set(MY_INCLUDE_PATH ${PROJECT_SOURCE_DIR}/include)
 add_subdirectory(external)
 add_subdirectory(src)
 add_subdirectory(test)
+add_subdirectory(example)
 

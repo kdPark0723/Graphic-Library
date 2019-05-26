@@ -1,0 +1,33 @@
+//
+// Created by siyualbak on 19. 5. 26.
+//
+
+#ifndef GRAPHICLIBRARY_GLFWRENDERINGCONTEXT_H
+#define GRAPHICLIBRARY_GLFWRENDERINGCONTEXT_H
+
+#include "../renderingContext.h"
+
+#include "../../window/surface.h"
+
+namespace gl {
+namespace internal {
+
+class GLFWRenderingContext : public RenderingContext {
+ public:
+  explicit GLFWRenderingContext(Surface &surface);
+  ~GLFWRenderingContext() final;
+
+  void doneCurrent() final;
+  void makeCurrent() final;
+
+  void swapBuffers() final;
+ private:
+  void makeCurrent(Surface *surface);
+
+  Surface *surface;
+};
+
+}
+}
+
+#endif //GRAPHICLIBRARY_GLFWRENDERINGCONTEXT_H
