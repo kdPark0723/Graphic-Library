@@ -11,9 +11,11 @@ struct Size {
   int width{}, height{};
 };
 
-bool operator!=(const Size &lhs, const Size &rhs);
-bool operator==(const Size &lhs, const Size &rhs);
+inline bool operator!=(const Size &lhs, const Size &rhs);
+inline bool operator==(const Size &lhs, const Size &rhs);
 
 }
+
+#include "size-inc.h"
 
 #endif //GRAPHICLIBRARY_SIZE_H

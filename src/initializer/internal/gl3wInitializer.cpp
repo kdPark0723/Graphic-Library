@@ -19,13 +19,12 @@ gl::internal::GL3WInitializer::GL3WInitializer(const gl::Initializer::Version &v
 gl::internal::GL3WInitializer::~GL3WInitializer() = default;
 
 void gl::internal::GL3WInitializer::init() {
-  if (isInited)
-    return;
+  if (!isInited) {
+    if (gl3wInit())
+      throw CantInitException{"gl::GL3WInitializer::init: Can't load gl."};
 
-  if (gl3wInit())
-    throw CantInitException{"gl::GL3WInitializer::init: Can't load gl."};
-
-  isInited = true;
+    isInited = true;
+  }
 
   if (!gl3wIsSupported(version.major, version.minor)) {
     std::stringstream error{};

@@ -7,22 +7,28 @@
 #include <gtest/gtest.h>
 
 #include "initializer/internal/glfwInitializer.h"
-#include "window/internal/glfwWindowSurface.h"
+#include "initializer/internal/gl3wInitializer.h"
+#include "window/internal/glfwScreenSurface.h"
+#include "window/internal/glfwWindow.h"
 
 TEST(GLFWRenderingContext_ConstructorAndDestructor_normal_test, normal) {
   gl::internal::GLFWInitializer glfwInitializer{{4, 3}};
+  gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
   glfwInitializer.init();
 
-  gl::internal::GLFWWindowSurface glfwWindowSurface{"Test", {1024, 768}};
-  gl::internal::GLFWRenderingContext{glfwWindowSurface};
+  gl::internal::GLfwWindow glfwWindow{"Test", {1024, 768}};
+  gl::internal::GLfwScreenSurface glfwWindowSurface{glfwWindow, gl3WInitializer};
+  gl::internal::GLfwRenderingContext{glfwWindowSurface, gl3WInitializer};
 }
 
 TEST(GLFWRenderingContext_MakeCurrent_normal_test, normal) {
   gl::internal::GLFWInitializer glfwInitializer{{4, 3}};
+  gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
   glfwInitializer.init();
 
-  gl::internal::GLFWWindowSurface glfwWindowSurface{"Test", {1024, 768}};
-  gl::internal::GLFWRenderingContext glfwRenderingContext{glfwWindowSurface};
+  gl::internal::GLfwWindow glfwWindow{"Test", {1024, 768}};
+  gl::internal::GLfwScreenSurface glfwWindowSurface{glfwWindow, gl3WInitializer};
+  gl::internal::GLfwRenderingContext glfwRenderingContext{glfwWindowSurface, gl3WInitializer};
 
   glfwRenderingContext.makeCurrent();
 
@@ -31,10 +37,12 @@ TEST(GLFWRenderingContext_MakeCurrent_normal_test, normal) {
 
 TEST(GLFWRenderingContext_DoneCurrent_normal_test, normal) {
   gl::internal::GLFWInitializer glfwInitializer{{4, 3}};
+  gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
   glfwInitializer.init();
 
-  gl::internal::GLFWWindowSurface glfwWindowSurface{"Test", {1024, 768}};
-  gl::internal::GLFWRenderingContext glfwRenderingContext{glfwWindowSurface};
+  gl::internal::GLfwWindow glfwWindow{"Test", {1024, 768}};
+  gl::internal::GLfwScreenSurface glfwWindowSurface{glfwWindow, gl3WInitializer};
+  gl::internal::GLfwRenderingContext glfwRenderingContext{glfwWindowSurface, gl3WInitializer};
 
   glfwRenderingContext.makeCurrent();
   glfwRenderingContext.doneCurrent();
@@ -44,10 +52,13 @@ TEST(GLFWRenderingContext_DoneCurrent_normal_test, normal) {
 
 TEST(GLFWRenderingContext_GetFrameBuffer_normal_test, normal) {
   gl::internal::GLFWInitializer glfwInitializer{{4, 3}};
+  gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
   glfwInitializer.init();
 
-  gl::internal::GLFWWindowSurface glfwWindowSurface{"Test", {1024, 768}};
-  gl::internal::GLFWRenderingContext glfwRenderingContext{glfwWindowSurface};
+  gl::internal::GLfwWindow glfwWindow{"Test", {1024, 768}};
+  gl::internal::GLfwScreenSurface glfwWindowSurface{glfwWindow, gl3WInitializer};
+  gl::internal::GLfwRenderingContext glfwRenderingContext{glfwWindowSurface, gl3WInitializer};
+  glfwRenderingContext.makeCurrent();
 
   auto frameBuffer = glfwRenderingContext.getFrameBuffer(gl::FrameBuffer::Buffer::Color);
 }

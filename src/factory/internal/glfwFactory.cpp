@@ -5,31 +5,32 @@
 #include "factory/internal/glfwFactory.h"
 
 #include "initializer/internal/glfwInitializer.h"
-#include "window/internal/glfwWindowSurface.h"
+#include "window/internal/glfwScreenSurface.h"
 #include "context/internal/glfwRenderingContext.h"
 
-gl::internal::GLFWFactory::GLFWFactory(const gl::Initializer::Version &version)
-  : initializer{std::make_unique<GLFWInitializer>(version)} {
+gl::internal::GLFWFactory::GLFWFactory(const gl::Initializer::Version &version, GLLoaderInitializer &glLoaderInitializer)
+  : initializer{std::make_unique<GLFWInitializer>(version)}, glLoaderInitializer{&glLoaderInitializer} {
   initializer->init();
 }
 
 gl::internal::GLFWFactory::~GLFWFactory() = default;
 
-std::unique_ptr<gl::Surface> gl::internal::GLFWFactory::createSurface(const ::std::string &title,
+std::shared_ptr<gl::Surface> gl::internal::GLFWFactory::createSurface(const ::std::string &title,
                                                                       const gl::Size &size) const {
   return std::unique_ptr<gl::Surface>();
 }
 
-std::unique_ptr<gl::WindowSurface> gl::internal::GLFWFactory::createWindowSurface(const ::std::string &title,
-                                                                                  const gl::Size &size) const {
-  return std::unique_ptr<gl::WindowSurface>{std::make_unique<GLFWWindowSurface>(title, size)};
+std::shared_ptr<gl::Window> gl::internal::GLFWFactory::createWindow(const ::std::string &title,
+                                                                    const gl::Size &size) const {
+  return std::unique_ptr<gl::Window>{std::make_unique<GLfwWindow>(title, size)};
 }
 
-std::unique_ptr<gl::OffScreenSurface> gl::internal::GLFWFactory::createOffScreenSurface(const ::std::string &title,
-                                                                                        const gl::Size &size) const {
+std::shared_ptr<gl::ScreenSurface> gl::internal::GLFWFactory::createScreenSurface(gl::Window &window) const {
+  return std::unique_ptr<gl::ScreenSurface>(std::make_unique<GLfwScreenSurface>(window, *glLoaderInitializer));
+}
+
+std::shared_ptr<gl::OffScreenSurface> gl::internal::GLFWFactory::createOffScreenSurface() const {
   return std::unique_ptr<gl::OffScreenSurface>();
 }
 
-std::unique_ptr<gl::RenderingContext> gl::internal::GLFWFactory::createRenderingContext(gl::Surface &surface) const {
-  return std::unique_ptr<gl::RenderingContext>(std::make_unique<GLFWRenderingContext>(surface));
-}
+

@@ -5,12 +5,12 @@
 #ifndef GRAPHICLIBRARY_GL3WINITIALIZER_H
 #define GRAPHICLIBRARY_GL3WINITIALIZER_H
 
-#include "initializer/initializer.h"
+#include "initializer/glLoaderInitializer.h"
 
 namespace gl {
 namespace internal {
 
-class GL3WInitializer : public Initializer {
+class GL3WInitializer : public GLLoaderInitializer {
  public:
   explicit GL3WInitializer(const Version &version);
   ~GL3WInitializer() override;

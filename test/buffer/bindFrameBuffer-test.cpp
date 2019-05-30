@@ -10,27 +10,27 @@
 #include "initializer/internal/gl3wInitializer.h"
 
 TEST(BindFrameBuffer_ConstructorAndDestructor_normal_test, normal) {
-  gl::internal::GLFWFactory glfwFactory{{4, 3}};
+  gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
+  gl::internal::GLFWFactory glfwFactory{{4, 3}, gl3WInitializer};
 
-  auto surface = glfwFactory.createWindowSurface("Test", {1024, 768});
-  auto rendererContext = glfwFactory.createRenderingContext(*surface);
+  auto window = glfwFactory.createWindow("Test", {1024, 768});
+  auto surface = glfwFactory.createScreenSurface(*window);
+  auto rendererContext = surface->getRenderingContext();
+
   auto frameBuffer = rendererContext->getFrameBuffer(gl::FrameBuffer::Buffer::Color);
 }
 
 TEST(BindFrameBuffer_Clear_normal_test, normal) {
-  gl::internal::GLFWFactory glfwFactory{{4, 3}};
-
-  auto surface = glfwFactory.createWindowSurface("Test", {1024, 768});
-  auto rendererContext = glfwFactory.createRenderingContext(*surface);
-
   gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
+  gl::internal::GLFWFactory glfwFactory{{4, 3}, gl3WInitializer};
 
-  try {
-    gl3WInitializer.init();
-  } catch (...) {
-  }
+  auto window = glfwFactory.createWindow("Test", {1024, 768});
+  auto surface = glfwFactory.createScreenSurface(*window);
+  auto rendererContext = surface->getRenderingContext();
 
   auto frameBuffer = rendererContext->getFrameBuffer(gl::FrameBuffer::Buffer::Color);
+
+  rendererContext->makeCurrent();
 
   GLint ints[] = {0, 0, 0, 0};
   frameBuffer->clear(0, ints);

@@ -8,23 +8,24 @@
 #include "../factory.h"
 
 #include "../../initializer/initializer.h"
+#include "../../initializer/glLoaderInitializer.h"
 
 namespace gl {
 namespace internal {
 
 class GLFWFactory : public Factory {
  public:
-  GLFWFactory(const Initializer::Version &version);
+  GLFWFactory(const Initializer::Version &version, GLLoaderInitializer &glLoaderInitializer);
   ~GLFWFactory() final;
 
-  ::std::unique_ptr<Surface> createSurface(const ::std::string &title, const Size &size) const final;
-  ::std::unique_ptr<WindowSurface> createWindowSurface(const ::std::string &title, const Size &size) const final;
-  ::std::unique_ptr<OffScreenSurface> createOffScreenSurface(const ::std::string &title, const Size &size) const final;
-
-  ::std::unique_ptr<RenderingContext> createRenderingContext(Surface &surface) const final;
+  std::shared_ptr<Surface> createSurface(const ::std::string &title, const Size &size) const final;
+  std::shared_ptr<Window> createWindow(const ::std::string &title, const Size &size) const final;
+  std::shared_ptr<ScreenSurface> createScreenSurface(Window &window) const final;
+  std::shared_ptr<OffScreenSurface> createOffScreenSurface() const final;
 
  private:
   ::std::unique_ptr<Initializer> initializer;
+  GLLoaderInitializer *glLoaderInitializer;
 };
 
 }

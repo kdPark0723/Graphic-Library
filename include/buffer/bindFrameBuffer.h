@@ -16,10 +16,10 @@ class BindFrameBuffer : public FrameBuffer {
   explicit BindFrameBuffer(RenderingContext &context, const FrameBuffer::Buffer &buffer);
   ~BindFrameBuffer() final;
 
-  void clear(GLint drawBuffer, const GLint *value) final;
-  void clear(GLint drawBuffer, const GLuint *value) final;
+  inline void clear(GLint drawBuffer, const GLint *value) final;
+  inline void clear(GLint drawBuffer, const GLuint *value) final;
 //  void clear(const Buffer &buffer, GLint drawBuffer, const GLfloat &value) final;
-  void clear(GLint drawBuffer, const GLfloat *value) final;
+  inline void clear(GLint drawBuffer, const GLfloat *value) final;
 
  private:
   RenderingContext *context;
@@ -27,5 +27,7 @@ class BindFrameBuffer : public FrameBuffer {
 };
 
 }
+
+#include "bindFrameBuffer-inc.h"
 
 #endif //GRAPHICLIBRARY_BINDFRAMEBUFFER_H

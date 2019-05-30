@@ -19,6 +19,9 @@ class Window {
   virtual const ::std::string getTitle() const = 0;
   virtual const Size getSize() const = 0;
   virtual bool shouldClose() const = 0;
+
+  virtual void *getWindowSurface() = 0;
+  virtual const void *getWindowSurface() const = 0;
 };
 
 }

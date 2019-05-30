@@ -8,33 +8,33 @@
 
 #include "exception/cantSetCurrentContextException.h"
 
-gl::internal::GLFWRenderingContext::GLFWRenderingContext(gl::Surface &surface)
-  : surface{&surface} {
+gl::internal::GLfwRenderingContext::GLfwRenderingContext(gl::Surface &surface, GLLoaderInitializer& glLoaderInitializer)
+  : surface{&surface}, glLoaderInitializer{&glLoaderInitializer} {
 }
 
-gl::internal::GLFWRenderingContext::~GLFWRenderingContext() {
-}
+gl::internal::GLfwRenderingContext::~GLfwRenderingContext() = default;
 
-void gl::internal::GLFWRenderingContext::doneCurrent() {
+void gl::internal::GLfwRenderingContext::doneCurrent() {
   makeCurrent(nullptr);
 }
 
-void gl::internal::GLFWRenderingContext::makeCurrent() {
+void gl::internal::GLfwRenderingContext::makeCurrent() {
   makeCurrent(surface);
 }
 
-void gl::internal::GLFWRenderingContext::makeCurrent(Surface *surface) {
+void gl::internal::GLfwRenderingContext::makeCurrent(Surface *surface) {
   try {
     if (surface != nullptr)
       glfwMakeContextCurrent(static_cast<GLFWwindow *>(surface->getPlatformSurface()));
     else
       glfwMakeContextCurrent(nullptr);
+    glLoaderInitializer->init();
   } catch (...) {
     throw CantSetCurrentContextException{"gl::internal::GLFWRenderingContext: Can't make context current."};
   }
 }
 
-void gl::internal::GLFWRenderingContext::swapBuffers() {
+void gl::internal::GLfwRenderingContext::swapBuffers() {
   glfwSwapBuffers(static_cast<GLFWwindow *>(surface->getPlatformSurface()));
   glfwPollEvents();
 }

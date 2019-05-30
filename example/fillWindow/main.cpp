@@ -4,23 +4,22 @@
 
 #include <iostream>
 
-#include "factory/internal/glfwFactory.h"
-#include "initializer/internal/gl3wInitializer.h"
+#include "initializer/glLoaderInitializerImp.h"
+#include "factory/factoryImp.h"
 #include "buffer/frameBuffer.h"
 #include "exception/exception.h"
 
 int main() {
-  gl::internal::GLFWFactory glfwFactory{{4, 3}};
+  gl::GLLoaderInitializerImp loaderInitializer{{4, 3}};
+  gl::FactoryImp factory{{4, 3}, loaderInitializer};
 
-  auto surface = glfwFactory.createWindowSurface("Test", {1024, 768});
-  auto rendererContext = glfwFactory.createRenderingContext(*surface);
+  auto window = factory.createWindow("Test", {1024, 768});
+  auto surface = factory.createScreenSurface(*window);
+  auto rendererContext = surface->getRenderingContext();
   rendererContext->makeCurrent();
 
-  gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
-  gl3WInitializer.init();
-
   auto colorBuffer = rendererContext->getFrameBuffer(gl::FrameBuffer::Buffer::Color);
-  while (!surface->shouldClose()) {
+  while (!window->shouldClose()) {
     static const GLfloat RED[] = {1.0f, 0.0f, 0.0f, 1.0f};
 
     colorBuffer->clear(0, RED);

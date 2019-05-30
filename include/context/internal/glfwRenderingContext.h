@@ -5,17 +5,17 @@
 #ifndef GRAPHICLIBRARY_GLFWRENDERINGCONTEXT_H
 #define GRAPHICLIBRARY_GLFWRENDERINGCONTEXT_H
 
+#include "../../initializer/glLoaderInitializer.h"
 #include "../renderingContext.h"
-
 #include "../../window/surface.h"
 
 namespace gl {
 namespace internal {
 
-class GLFWRenderingContext : public RenderingContext {
+class GLfwRenderingContext : public RenderingContext {
  public:
-  explicit GLFWRenderingContext(Surface &surface);
-  ~GLFWRenderingContext() final;
+  explicit GLfwRenderingContext(Surface &surface, GLLoaderInitializer& glLoaderInitializer);
+  ~GLfwRenderingContext() final;
 
   void doneCurrent() final;
   void makeCurrent() final;
@@ -25,6 +25,7 @@ class GLFWRenderingContext : public RenderingContext {
   void makeCurrent(Surface *surface);
 
   Surface *surface;
+  GLLoaderInitializer* glLoaderInitializer;
 };
 
 }
