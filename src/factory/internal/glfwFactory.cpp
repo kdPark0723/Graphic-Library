@@ -17,20 +17,20 @@ gl::internal::GLFWFactory::~GLFWFactory() = default;
 
 std::shared_ptr<gl::Surface> gl::internal::GLFWFactory::createSurface(const ::std::string &title,
                                                                       const gl::Size &size) const {
-  return std::unique_ptr<gl::Surface>();
+  return std::shared_ptr<gl::Surface>();
 }
 
 std::shared_ptr<gl::Window> gl::internal::GLFWFactory::createWindow(const ::std::string &title,
                                                                     const gl::Size &size) const {
-  return std::unique_ptr<gl::Window>{std::make_unique<GLfwWindow>(title, size)};
+  return std::shared_ptr<gl::Window>{std::make_shared<GLfwWindow>(title, size)};
 }
 
 std::shared_ptr<gl::ScreenSurface> gl::internal::GLFWFactory::createScreenSurface(gl::Window &window) const {
-  return std::unique_ptr<gl::ScreenSurface>(std::make_unique<GLfwScreenSurface>(window, *glLoaderInitializer));
+  return std::shared_ptr<gl::ScreenSurface>(std::make_shared<GLfwScreenSurface>(window, *glLoaderInitializer));
 }
 
 std::shared_ptr<gl::OffScreenSurface> gl::internal::GLFWFactory::createOffScreenSurface() const {
-  return std::unique_ptr<gl::OffScreenSurface>();
+  return std::shared_ptr<gl::OffScreenSurface>();
 }
 
 

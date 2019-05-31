@@ -20,10 +20,11 @@ class Program {
   explicit Program(const Initializer::Version &version);
   ~Program();
 
-  Factory* getFactory();
+  ::std::shared_ptr<Factory> getFactory();
+
  private:
   const Initializer::Version version;
-  ::std::shared_ptr<GLLoaderInitializer> loaderInitializer;
+  ::std::unique_ptr<GLLoaderInitializer> loaderInitializer;
   ::std::shared_ptr<Factory> factory;
 };
 

@@ -18,7 +18,7 @@ class FrameBuffer : public Buffer {
   };
 
   FrameBuffer() = default;
-  virtual ~FrameBuffer() = default;
+  ~FrameBuffer() override = default;
 
   virtual void clear(GLint drawBuffer, const GLint *value) = 0;
   virtual void clear(GLint drawBuffer, const GLuint *value) = 0;

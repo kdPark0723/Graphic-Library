@@ -34,10 +34,10 @@ int main() {
       rendererContext1->swapBuffers();
     }
     if (!window2->shouldClose()) {
-      static const GLfloat BRUE[] = {0.0f, 0.0f, 1.0f, 1.0f};
+      static const GLfloat BLUE[] = {0.0f, 0.0f, 1.0f, 1.0f};
       rendererContext2->makeCurrent();
 
-      colorBuffer2->clear(0, BRUE);
+      colorBuffer2->clear(0, BLUE);
 
       rendererContext2->swapBuffers();
     }

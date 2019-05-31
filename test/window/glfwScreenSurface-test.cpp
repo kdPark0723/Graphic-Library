@@ -29,4 +29,6 @@ TEST(GLFWSceenSurface_GetRenderingContext_normal_test, normal) {
   gl::internal::GLfwScreenSurface surface{window, gl3WInitializer};
 
   auto renderingContext = surface.getRenderingContext();
+
+  ASSERT_NE(renderingContext, nullptr);
 }

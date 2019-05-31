@@ -6,6 +6,8 @@
 
 #include "exception/cantInitException.h"
 
+class GLfwWindow;
+class window;
 gl::internal::GLfwWindow::GLfwWindow(const ::std::string &title, const gl::Size &size): title{title} {
   window = glfwCreateWindow(size.width, size.height, title.c_str(), nullptr, nullptr);
   if (window == nullptr)
@@ -29,7 +31,7 @@ const gl::Size gl::internal::GLfwWindow::getSize() const {
 }
 
 bool gl::internal::GLfwWindow::shouldClose() const {
-  return glfwWindowShouldClose(window);
+  return static_cast<bool>(glfwWindowShouldClose(window));
 }
 
 void *gl::internal::GLfwWindow::getWindowSurface() {
