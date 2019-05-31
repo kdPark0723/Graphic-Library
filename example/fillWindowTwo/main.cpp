@@ -4,20 +4,19 @@
 
 #include <iostream>
 
-#include "initializer/glLoaderInitializerImp.h"
-#include "factory/factoryImp.h"
+#include "program.h"
 #include "buffer/frameBuffer.h"
-#include "exception/exception.h"
 
 int main() {
-  gl::GLLoaderInitializerImp loaderInitializer{{4, 3}};
-  gl::FactoryImp factory{{4, 3}, loaderInitializer};
+  gl::Program program{{4, 3}};
 
-  auto window1 = factory.createWindow("Test1", {1024, 768});
-  auto window2 = factory.createWindow("Test1", {1024, 768});
+  auto factory = program.getFactory();
 
-  auto surface1 = factory.createScreenSurface(*window1);
-  auto surface2 = factory.createScreenSurface(*window2);
+  auto window1 = factory->createWindow("Test1", {1024, 768});
+  auto window2 = factory->createWindow("Test1", {1024, 768});
+
+  auto surface1 = factory->createScreenSurface(*window1);
+  auto surface2 = factory->createScreenSurface(*window2);
 
   auto rendererContext1 = surface1->getRenderingContext();
   auto rendererContext2 = surface2->getRenderingContext();

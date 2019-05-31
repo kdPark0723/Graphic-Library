@@ -8,7 +8,6 @@
 #include "initializer.h"
 
 namespace gl {
-namespace internal {
 
 class GLLoaderInitializer : public Initializer {
  public:
@@ -16,7 +15,6 @@ class GLLoaderInitializer : public Initializer {
   ~GLLoaderInitializer() override = default;
 };
 
-}
 }
 
 #endif //GRAPHICLIBRARY_GLLOADINITIALIZER_H
