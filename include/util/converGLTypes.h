@@ -16,13 +16,18 @@ constexpr GLenum getGLenum(Integer value) {
 }
 
 template<typename Integer>
-constexpr GLenum getGLsizeiptr(Integer size) {
-  return static_cast<GLenum>(static_cast<GLsizeiptr>(size));
+constexpr GLsizeiptr getGLsizeiptr(Integer size) {
+  return static_cast<GLsizeiptr>(size);
 }
 
 template<typename Integer>
-constexpr GLenum getGLintptr(Integer value) {
-  return static_cast<GLenum>(static_cast<GLintptr>(value));
+constexpr GLsizei getGLsizei(Integer size) {
+  return static_cast<GLsizei>(size);
+}
+
+template<typename Integer>
+constexpr GLintptr getGLintptr(Integer value) {
+  return static_cast<GLintptr>(value);
 }
 
 template<typename Integer>

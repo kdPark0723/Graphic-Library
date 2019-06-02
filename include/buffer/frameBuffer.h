@@ -15,6 +15,8 @@ class FrameBuffer : public Buffer {
  public:
   enum class Buffer {
     Color = GL_COLOR,
+    Depth = GL_DEPTH,
+    Stencil = GL_STENCIL,
   };
 
   FrameBuffer() = default;

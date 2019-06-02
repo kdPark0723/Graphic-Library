@@ -24,6 +24,8 @@ void gl::internal::GL3WInitializer::init() {
       throw CantInitException{"gl::GL3WInitializer::init: Can't load gl."};
 
     isInited = true;
+
+    GLLoaderInitializer::init();
   }
 
   if (!gl3wIsSupported(version.major, version.minor)) {

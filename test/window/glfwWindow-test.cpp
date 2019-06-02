@@ -10,7 +10,7 @@
 
 #include "exception/internalLibraryException.h"
 
-TEST(GLFWWindow_ConstructorAndDestructor_normal_test, normal) {
+TEST(GLFWWindow_ConstructorAndDestructor, normal) {
   {
     gl::internal::GLFWInitializer glfwInitializer{{4, 3}};
     glfwInitializer.init();
@@ -25,7 +25,7 @@ TEST(GLFWWindow_ConstructorAndDestructor_normal_test, normal) {
   }
 }
 
-TEST(GLFWWindow_GetTitle_normal_test, normal) {
+TEST(GLFWWindow_GetTitle, normal) {
   gl::internal::GLFWInitializer glfwInitializer{{4, 3}};
   glfwInitializer.init();
 
@@ -34,7 +34,7 @@ TEST(GLFWWindow_GetTitle_normal_test, normal) {
   ASSERT_EQ(title, glfwWindowSurface.getTitle());
 }
 
-TEST(GLFWWindow_GetSize_normal_test, normal) {
+TEST(GLFWWindow_GetSize, normal) {
   gl::internal::GLFWInitializer glfwInitializer{{4, 3}};
   glfwInitializer.init();
 

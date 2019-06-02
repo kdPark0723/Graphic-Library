@@ -9,7 +9,7 @@
 #include "factory/internal/glfwFactory.h"
 #include "initializer/internal/gl3wInitializer.h"
 
-TEST(BindFrameBuffer_ConstructorAndDestructor_normal_test, normal) {
+TEST(BindFrameBuffer_ConstructorAndDestructor, normal) {
   gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
   gl::internal::GLFWFactory glfwFactory{{4, 3}, gl3WInitializer};
 
@@ -20,7 +20,7 @@ TEST(BindFrameBuffer_ConstructorAndDestructor_normal_test, normal) {
   auto frameBuffer = rendererContext->getFrameBuffer(gl::FrameBuffer::Buffer::Color);
 }
 
-TEST(BindFrameBuffer_Clear_normal_test, normal) {
+TEST(BindFrameBuffer_Clear, normal) {
   gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
   gl::internal::GLFWFactory glfwFactory{{4, 3}, gl3WInitializer};
 

@@ -6,11 +6,11 @@
 
 #include "program.h"
 
-TEST(Program_ConstructorAndDestructor_normal_test, normal) {
+TEST(Program_ConstructorAndDestructor, normal) {
   gl::Program program{{4, 3}};
 }
 
-TEST(Program_GetFactory_normal_test, normal) {
+TEST(Program_GetFactory, normal) {
   gl::Program program{{4, 3}};
 
   auto factory = program.getFactory();

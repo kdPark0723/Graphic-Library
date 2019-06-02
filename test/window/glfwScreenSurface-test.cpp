@@ -9,7 +9,7 @@
 #include "initializer/internal/gl3wInitializer.h"
 #include "window/internal/glfwWindow.h"
 
-TEST(GLFWSceenSurface_ConstructorAndDestructor_normal_test, normal) {
+TEST(GLFWSceenSurface_ConstructorAndDestructor, normal) {
   gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
   gl::internal::GLFWInitializer glfwInitializer{{4, 3}};
   glfwInitializer.init();
@@ -19,7 +19,7 @@ TEST(GLFWSceenSurface_ConstructorAndDestructor_normal_test, normal) {
   gl::internal::GLfwScreenSurface{window, gl3WInitializer};
 }
 
-TEST(GLFWSceenSurface_GetRenderingContext_normal_test, normal) {
+TEST(GLFWSceenSurface_GetRenderingContext, normal) {
   gl::internal::GL3WInitializer gl3WInitializer{{4, 3}};
   gl::internal::GLFWInitializer glfwInitializer{{4, 3}};
   glfwInitializer.init();

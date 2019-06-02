@@ -6,6 +6,7 @@
 #define GRAPHICLIBRARY_GLLOADINITIALIZER_H
 
 #include "initializer.h"
+#include "openGL.h"
 
 namespace gl {
 
@@ -13,6 +14,19 @@ class GLLoaderInitializer : public Initializer {
  public:
   GLLoaderInitializer() = default;
   ~GLLoaderInitializer() override = default;
+
+  void init() override;
+
+ private:
+  static void errorCallback(GLenum source,
+                            GLenum type,
+                            GLuint id,
+                            GLenum severity,
+                            GLsizei length,
+                            const GLchar *message,
+                            const void *userParam);
+
+  static bool isInited;
 };
 
 }

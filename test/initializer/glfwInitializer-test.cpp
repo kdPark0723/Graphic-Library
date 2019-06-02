@@ -14,11 +14,11 @@
 #include "exception/notSupportException.h"
 #include "exception/internalLibraryException.h"
 
-TEST(GLFWInitializer_ConstructorAndDestructor_normal_Test, normal) {
+TEST(GLFWInitializer_ConstructorAndDestructor, normal) {
   gl::internal::GLFWInitializer{{4, 3}};
 }
 
-TEST(GLFWInitializer_init_normal_Test, normal) {
+TEST(GLFWInitializer_init, normal) {
   gl::internal::GLFWInitializer glfwInitializer{{4, 3}};
   glfwInitializer.init();
 }

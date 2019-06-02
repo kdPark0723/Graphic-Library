@@ -11,11 +11,11 @@
 #include "exception/cantInitException.h"
 #include "exception/notSupportException.h"
 
-TEST(GL3WInitializer_ConstructorAndDestructor_normal_Test, normal) {
+TEST(GL3WInitializer_ConstructorAndDestructor, normal) {
   gl::internal::GL3WInitializer{{4, 3}};
 }
 
-TEST(GL3WInitializer_init_normal_Test, normal) {
+TEST(GL3WInitializer_init, normal) {
   gl::internal::GL3WInitializer gl3WInitializer{{100, 100}};
 
   ASSERT_THROW(gl3WInitializer.init(), gl::NotSupportException);
